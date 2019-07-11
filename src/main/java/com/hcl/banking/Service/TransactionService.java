@@ -18,16 +18,27 @@ public class TransactionService {
 
 	@Autowired
 	AccountService accountService;
-	
-	public List<Transaction> getTransactions(String username) {
-		
-		Account account = accountService.findAccountByUserName(username);
-		
-		return transactionRepository.findByToAccountNumber(account.getAccountNumber());
-		
-	}
-	
 
+	/**
+	 * This method will return all transactions of particilar user
+	 * 
+	 * @param username : username of the user
+	 * @return: List of transactions
+	 */
+	public List<Transaction> getTransactions(String username) {
+
+		Account account = accountService.findAccountByUserName(username);
+
+		return transactionRepository.findByToAccountNumber(account.getAccountNumber());
+
+	}
+
+	/**
+	 * This method will process all the transactions of credit/debit
+	 * 
+	 * @param txn : Transaction entity details
+	 * @return : boolean
+	 */
 	public boolean processTransaction(Transaction txn) {
 
 		boolean isTransactionValid = (txn != null && txn.getToAccountNumber().toString().length() == 8
@@ -63,6 +74,5 @@ public class TransactionService {
 		}
 		return false;
 	}
-	
-	
+
 }

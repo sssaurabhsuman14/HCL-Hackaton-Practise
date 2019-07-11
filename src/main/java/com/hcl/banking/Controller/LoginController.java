@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.banking.Model.LoginModel;
 import com.hcl.banking.Service.LoginService;
 
+/**
+ * @author saurabh.suman
+ *
+ */
 @RestController
 
 @RequestMapping("/login")
@@ -19,7 +23,12 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 
+	
 	@PostMapping
+	/** This method will login the user if credentials are correct
+	 * @param user : LoginModel
+	 * @return : ResponseEntity object
+	 */
 	public ResponseEntity<?> login(@RequestBody LoginModel user) {
 		String userName=user.getUserName();
 		String password =user.getPassword();
@@ -46,6 +55,12 @@ public class LoginController {
 		return new ResponseEntity<>("login unsuccessful", HttpStatus.BAD_REQUEST);
 	}
 
+	
+	/** This method will validate the login details 
+	 * @param userName  : Username of the user
+	 * @param password : password for user
+	 * @return : boolean 'true' if validated else boolean 'false' 
+	 */
 	public boolean validate(String userName, String password) {
 		if (userName != null && password != null) {
 			return true;

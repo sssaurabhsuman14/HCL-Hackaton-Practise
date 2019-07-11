@@ -21,6 +21,13 @@ public class RegistrationService {
 	@Autowired
 	UserService userService;
 
+	/**
+	 * This method will register and add user to user table with initial amount of
+	 * 10,000
+	 * 
+	 * @param model :RegistationModel details
+	 * @return : User Entity
+	 */
 	public User registerAndAddUser(RegistationModel model) {
 
 		User user = new User();
@@ -30,10 +37,8 @@ public class RegistrationService {
 		user.setPhoneNumber(model.getPhoneNumber());
 		userService.add(user);
 
-		// TODO Need to generate random account number
-		
 		Account account = new Account();
-		account.setAccountNumber((long) Math.abs(Math.random()*100000000));
+		account.setAccountNumber((long) Math.abs(Math.random() * 100000000));
 		account.setAmount(10000d);
 		account.setUserName(user.getUserName());
 		account.setCreatedDate(new Date());
